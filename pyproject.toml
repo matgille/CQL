@@ -1,0 +1,19 @@
+[project]
+name = "CQLEngine - a simple Corpus Query Language processor"
+version = "0.0.1"
+authors = [
+  { name="Matthias Gille Levenson", email="matthias.gille-levenson@ens-lyon.fr" },
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/matgille/CQL"
+Issues = "https://github.com/matgille/CQL/issues"
