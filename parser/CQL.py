@@ -20,16 +20,19 @@ import sys
 class CQLEngine():
 	def findall(self, corpus, query):
 		query_ast = build_grammar(debug=True, query=query)
-		result = parse_corpus(query_ast, corpus, debug=True, check_if_match=False)
+		result = parse_corpus(query_ast, corpus, debug=True, match=False)
 		print(f"\n---\nResults for query {query}:")
 		print(result)
+		return result
 
 
-	def check_if_match(self, corpus, query):
+	def match(self, corpus, query):
 		query_ast = build_grammar(debug=True, query=query)
-		result = parse_corpus(query_ast, corpus, debug=True, check_if_match=False)
+		result = parse_corpus(query_ast, corpus, debug=True, match=False)
 		print(f"\n---\nResults for query {query}:")
+		result = len(result) != 0
 		print(result)
+		return result
 
 
 def build_grammar(debug, query):
@@ -41,7 +44,7 @@ def build_grammar(debug, query):
 	return MyParser.ast
 
 
-def parse_corpus(ast, corpus, debug, check_if_match=True):
+def parse_corpus(ast, corpus, debug, match=True):
 	match = False
 	tree_index = 0
 	text_index = 0
@@ -81,7 +84,7 @@ def parse_corpus(ast, corpus, debug, check_if_match=True):
 		if tree_index == ast_length:
 			all_spans.append((first_matching_index, text_index))
 			first_matching_index = None
-			if check_if_match is True:
+			if match is True:
 				return True
 			if debug:
 				print(f"Appending {(first_matching_index, text_index)} to spans.")
@@ -183,3 +186,4 @@ if __name__ == '__main__':
 	corpus = functions.import_corpus("../test/test_corpus.json")
 	MyEngine = CQLEngine()
 	MyEngine.findall(corpus, query)
+	MyEngine.match(corpus[10:30], query)
