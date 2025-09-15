@@ -53,3 +53,4 @@ lexer.input(sys.argv[1])
 
 ast = parser.parse(lexer=lexer)
 print("AST généré :", ast)
+
