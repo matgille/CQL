@@ -11,38 +11,38 @@ import json
 # - a list of spans (search_all function)
 # - a boolean (match function)
 
-import parser as parser
-import lexer as lexer
-import functions as functions
-import engine as engine
+import src.CQLEngine.parser as parser
+import src.CQLEngine.lexer as lexer
+import src.CQLEngine.functions as functions
+import src.CQLEngine.engine as engine
 import sys
 
 
 class CQLEngine():
-	def findall(self, corpus:list[dict], query:str) -> list[tuple[int, int]]:
+	def findall(self, corpus:list[dict], query:str, debug) -> list[tuple[int, int]]:
 		"""
 			This function checks if a query matches some text, and returns the start and end span.
 			:param query: a CQL query
 			:param corpus: the annotated text as a list of dictionnaries containing the annotations (lemma, pos, morph, word)
 			:return: a list of tuples with the start and end position.
 			"""
-		query_ast = build_grammar(debug=True, query=query)
-		result = engine.parse_corpus(query_ast, corpus, debug=True, match=False)
+		query_ast = build_grammar(debug=debug, query=query)
+		result = engine.parse_corpus(query_ast, corpus, debug=debug, match=False)
 		print(f"\n---\nResults for query {query}:")
-		print(query_ast)
-		print(result)
+		print(f"Ast: {query_ast}")
+		print(f"Spans: {result}")
 		return result
 
 
-	def match(self, corpus:list[dict], query:str) -> bool:
+	def match(self, corpus:list[dict], query:str, debug:bool) -> bool:
 		"""
 		This function checks whether a query matches some text, and returns True or False
 		:param query: a CQL query
 		:param corpus: the annotated text as a list of dictionnaries containing the annotations (lemma, pos, morph, word)
 		:return: a boolean
 		"""
-		query_ast = build_grammar(debug=True, query=query)
-		result = engine.parse_corpus(query_ast, corpus, debug=True, match=False)
+		query_ast = build_grammar(debug=debug, query=query)
+		result = engine.parse_corpus(query_ast, corpus, debug=debug, match=False)
 		print(f"\n---\nResults for query {query}:")
 		result = len(result) != 0
 		print(result)
@@ -52,7 +52,7 @@ class CQLEngine():
 def build_grammar(debug, query):
 	MyLexer = lexer.Lexer()
 	MyLexer.build(query, debug=debug)
-	MyParser = parser.Parser(MyLexer)
+	MyParser = parser.Parser(MyLexer, debug=debug)
 	if debug:
 		print(MyParser.ast)
 	return MyParser.ast

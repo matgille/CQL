@@ -1,6 +1,4 @@
 import ast
-import json
-import unittest
 
 import src.CQLEngine.CQL as CQLEngine
 import src.CQLEngine.functions as functions
@@ -12,8 +10,17 @@ def import_test_queries(path):
 		list_of_queries = f.read().splitlines()
 	return [line.split("\t") for line in list_of_queries]
 
-class TestStringMethods(unittest.TestCase):
 
+class TestFunctions(unittest.TestCase):
+	def test_simple_match(self):
+		query = ("lemma", "!=", "asno")
+		test_token = {"lemma": "asno",
+					  "pos": "NCMS000",
+					  "morph": None,
+					  "word": "asnos"}
+		self.assertEqual(functions.simple_match(query, test_token), False)
+
+class TestQueries(unittest.TestCase):
 	def test_findall_queries(self):
 		self.corpus = functions.import_corpus("test_data/test_corpus.json")
 		self.queries = import_test_queries("tests/queries_findall.txt")

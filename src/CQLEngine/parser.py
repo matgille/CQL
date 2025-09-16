@@ -1,6 +1,5 @@
-
 import ply.yacc as yacc
-import lexer as lexer
+import src.CQLEngine.lexer as lexer
 
 
 
@@ -97,10 +96,10 @@ class Parser(lexer.Lexer):
 
 
 
-    def __init__(self, lexer):
+    def __init__(self, lexer, debug):
         self.lexer = lexer
-        self.parser = yacc.yacc(module=self, start='queries', debug=True)
-        self.ast = self.parser.parse(lexer=self.lexer, tracking=True, debug=True)
+        self.parser = yacc.yacc(module=self, start='queries', debug=debug)
+        self.ast = self.parser.parse(lexer=self.lexer, tracking=True, debug=debug)
 
 
 

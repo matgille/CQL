@@ -86,12 +86,13 @@ class Lexer(object):
         self.lexer = lex.lex(module=self)
         self.lexer.input(query)
 
-        debug_lexer = copy.deepcopy(self.lexer)
-        while True:
-            tok = debug_lexer.token()
-            if not tok:
-                break  # No more input
-            print(tok)
+        if debug:
+            debug_lexer = copy.deepcopy(self.lexer)
+            while True:
+                tok = debug_lexer.token()
+                if not tok:
+                    break  # No more input
+                print(tok)
 
     def token(self):
         return self.lexer.token()

@@ -1,14 +1,16 @@
-import functions as functions
+import src.CQLEngine.functions as functions
 
 def parse_corpus(ast, corpus, debug, match=True):
 	match = False
 	tree_index = 0
 	text_index = 0
 
-	for item in ast:
-		print(item)
+
 	ast_length = len(ast)
-	print(f"{ast_length} items to match.")
+	if debug:
+		for item in ast:
+			print(item)
+		print(f"{ast_length} items to match.")
 
 	all_spans = []
 	matches = False
@@ -19,9 +21,9 @@ def parse_corpus(ast, corpus, debug, match=True):
 
 	# Text-directed engine.
 	while match == False:
-		print("-")
-		print(corpus[text_index])
 		if debug:
+			print("-")
+			print(corpus[text_index])
 			print(f"Text index: {text_index}")
 			print(f"Tree index: {tree_index}")
 			print(f"Ast length: {ast_length}")
