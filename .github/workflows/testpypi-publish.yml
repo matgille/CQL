@@ -48,6 +48,11 @@ jobs:
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
+      - name: Télécharger les artefacts du build
+        uses: actions/download-artifact@v4  # <-- Ajoutez cette étape
+        with:
+          name: release-dists  # <-- Nom de l'artefact uploadé dans `release-build`
+          path: dist/
       # retrieve your distributions here
       - name: Publish package distributions to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
