@@ -19,7 +19,6 @@ permissions:
 jobs:
   release-build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v5
 
@@ -43,8 +42,8 @@ jobs:
     name: Publish package distributions to TestPyPI
     runs-on: ubuntu-latest
     environment:
-      name: pypi
-      url: https://pypi.org/p/CQLParser
+      name: Testpypi
+      url: https://test.pypi.org/p/CQLEngine
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
