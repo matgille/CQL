@@ -7,11 +7,11 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Upload Python Package
+name: Upload on test.pypi
 
 on:
   push:
-    tags: '*'
+    tags: '**'
 
 permissions:
   contents: read
@@ -41,6 +41,7 @@ jobs:
           python3 -m unittest tests/tests.py 
 
   release-build:
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
