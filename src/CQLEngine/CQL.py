@@ -63,7 +63,7 @@ def build_grammar(debug, query):
 
 if __name__ == '__main__':
 	query = sys.argv[1]
-	corpus = functions.import_corpus("test/test_corpus.json")
+	corpus = functions.import_corpus("tests/test_data/test_corpus.json")
 	MyEngine = CQLEngine()
 	MyEngine.findall(corpus, query)
-	# MyEngine.match(corpus, query)
+	MyEngine.match(corpus, query)

@@ -22,8 +22,8 @@ class TestFunctions(unittest.TestCase):
 
 class TestQueries(unittest.TestCase):
 	def test_findall_queries(self):
-		self.corpus = functions.import_corpus("test_data/test_corpus.json")
-		self.queries = import_test_queries("tests/queries_findall.txt")
+		self.corpus = functions.import_corpus("tests/test_data/test_corpus.json")
+		self.queries = import_test_queries("tests/tests/queries_findall.txt")
 		self.MyEngine = CQLEngine.CQLEngine()
 		for query, GT in self.queries:
 			GT = ast.literal_eval(GT)
@@ -32,8 +32,8 @@ class TestQueries(unittest.TestCase):
 
 
 	def test_match_queries(self):
-		self.corpus = functions.import_corpus("test_data/test_corpus.json")
-		self.queries = import_test_queries("tests/queries_match.txt")
+		self.corpus = functions.import_corpus("tests/test_data/test_corpus.json")
+		self.queries = import_test_queries("tests/tests/queries_match.txt")
 		self.MyEngine = CQLEngine.CQLEngine()
 		for query, GT in self.queries:
 			with self.subTest(query=query, GT=GT):
