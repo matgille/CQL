@@ -1,7 +1,7 @@
 import ast
-
+import sys
+sys.path.append('src/')
 import CQLEngine.functions as functions
-
 import unittest
 
 def import_test_queries(path):
