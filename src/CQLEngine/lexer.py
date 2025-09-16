@@ -1,6 +1,5 @@
 import ply.lex as lex
 import copy
-print("Imported")
 
 class Lexer(object):
     tokens = (

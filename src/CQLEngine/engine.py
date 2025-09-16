@@ -1,4 +1,5 @@
-import src.CQLEngine.functions as functions
+import CQLEngine.functions as functions
+
 
 def parse_corpus(ast, corpus, debug, match=True):
 	match = False

@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-import src.CQLEngine.lexer as lexer
+import CQLEngine.lexer as lexer
 
 
 
