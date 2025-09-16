@@ -1,6 +1,6 @@
 [project]
 name = "CQLEngine"
-version = "0.0.3/alpha"
+version = "0.0.3"
 authors = [
   { name="Matthias Gille Levenson", email="matthias.gille-levenson@ens-lyon.fr" },
 ]
