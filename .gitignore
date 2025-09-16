@@ -3,3 +3,5 @@ venv/
 *.out
 parsetab.py
 __pycache__/
+dist/
+*egg-info
