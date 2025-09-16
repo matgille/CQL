@@ -11,7 +11,8 @@ name: Upload on test.pypi
 
 on:
   push:
-    tags: '**'
+    branches: [ "dev" ]
+    tags: '*'
 
 permissions:
   contents: read

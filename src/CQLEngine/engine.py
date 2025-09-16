@@ -1,7 +1,7 @@
 import CQLEngine.functions as functions
 
 
-def parse_corpus(ast, corpus, debug, match=True):
+def parse_corpus(ast, corpus, debug):
 	match = False
 	tree_index = 0
 	text_index = 0

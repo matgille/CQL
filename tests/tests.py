@@ -12,12 +12,13 @@ def import_test_queries(path):
 
 class TestFunctions(unittest.TestCase):
 	def test_simple_match(self):
-		query = ("lemma", "!=", "asno")
+		query = ("lemma", "=", "asno")
 		test_token = {"lemma": "asno",
 					  "pos": "NCMS000",
 					  "morph": None,
 					  "word": "asnos"}
-		self.assertEqual(functions.simple_match(query, test_token), False)
+		self.assertEqual(functions.simple_match(query, test_token), True, "Something is wrong"
+																		  "with function `test_simple_match`")
 
 class TestQueries(unittest.TestCase):
 	def test_findall_queries(self):
@@ -27,7 +28,7 @@ class TestQueries(unittest.TestCase):
 		for query, GT in self.queries:
 			GT = ast.literal_eval(GT)
 			with self.subTest(query=query, GT=GT):
-				self.assertEqual(self.MyEngine.findall(self.corpus, query, debug=False), GT)
+				self.assertEqual(self.MyEngine.findall(self.corpus, query, debug=False), GT, "Error with findall function")
 
 
 	def test_match_queries(self):
