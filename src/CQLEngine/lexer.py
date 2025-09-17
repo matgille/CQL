@@ -81,7 +81,7 @@ class Lexer(object):
         print("Illegal character '%s'" % t.value[0])
         t.lexer.skip(1)
 
-    def build(self, query, debug):
+    def tokenize(self, query, debug):
         self.lexer = lex.lex(module=self)
         self.lexer.input(query)
 
