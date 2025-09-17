@@ -1,4 +1,4 @@
-import corpus_query_language.functions.functions as functions
+import corpus_query_language.utils.utils as utils
 import corpus_query_language.engine.engine as engine
 
 class CQLEngine():
@@ -9,7 +9,7 @@ class CQLEngine():
 			:param corpus: the annotated text as a list of dictionnaries containing the annotations (lemma, pos, morph, word)
 			:return: a list of tuples with the start and end position.
 			"""
-		query_ast = functions.build_grammar(debug=debug, query=query)
+		query_ast = utils.build_grammar(debug=debug, query=query)
 		result = engine.parse_corpus(query_ast, corpus, mode="find", debug=debug)
 		if verbose:
 			print(f"\n---\nResults for query {query}:")
@@ -25,7 +25,7 @@ class CQLEngine():
 		:param corpus: the annotated text as a list of dictionnaries containing the annotations (lemma, pos, morph, word)
 		:return: a boolean
 		"""
-		query_ast = functions.build_grammar(debug=debug, query=query)
+		query_ast = utils.build_grammar(debug=debug, query=query)
 		result = engine.parse_corpus(query_ast, corpus, mode="match", debug=debug)
 		if verbose:
 			print(f"\n---\nResults for query {query}:")

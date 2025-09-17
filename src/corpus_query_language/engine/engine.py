@@ -1,4 +1,4 @@
-import corpus_query_language.functions.functions as functions
+import corpus_query_language.utils.utils as utils
 
 
 def parse_corpus(ast, corpus, mode, debug):
@@ -65,7 +65,7 @@ def parse_corpus(ast, corpus, mode, debug):
 				print(f"{operator} in list of analysis")
 				print(len(corpus))
 				print(text_index)
-			if functions.simple_match(current_query, corpus[text_index]):
+			if utils.simple_match(current_query, corpus[text_index]):
 				if debug:
 					print("Found you a. Going forward on tree and text.")
 					print(f"First match is {text_index}")
@@ -84,7 +84,7 @@ def parse_corpus(ast, corpus, mode, debug):
 			if debug:
 				print(f"{operator} operator")
 			if operator == "or":
-				if functions.alternative_match(current_query[1:], corpus[text_index]):
+				if utils.alternative_match(current_query[1:], corpus[text_index]):
 					if debug:
 						print("Found your alternative. Going forward on tree and text.")
 						print(f"First match is {text_index}")
@@ -107,7 +107,7 @@ def parse_corpus(ast, corpus, mode, debug):
 						print(f"\t{text_index}: Looking for {ast[tree_index + 1]} in position {text_index}")
 					if len(corpus) == text_index:
 						break
-					if functions.simple_match(ast[tree_index + 1], corpus[text_index]):
+					if utils.simple_match(ast[tree_index + 1], corpus[text_index]):
 						submatch = True
 						tree_index += 2
 						if debug:
@@ -126,7 +126,7 @@ def parse_corpus(ast, corpus, mode, debug):
 			elif operator == "and":
 				all_matches = []
 				for item in current_query[1:]:
-					if functions.simple_match(item, corpus[text_index]):
+					if utils.simple_match(item, corpus[text_index]):
 						all_matches.append(True)
 					else:
 						all_matches.append(False)
@@ -143,7 +143,7 @@ def parse_corpus(ast, corpus, mode, debug):
 				# Pour l'opérateur "0 ou 1", on vérifie que le token matche.
 				# S'il ne matche pas, on passe à la requête suivante sans
 				# incrémenter le texte
-				if functions.alternative_match(current_query[1:], corpus[text_index]):
+				if utils.alternative_match(current_query[1:], corpus[text_index]):
 					if debug:
 						print("Found your alternative. Going forward on tree and text.")
 						print(f"First match is {text_index}")

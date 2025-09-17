@@ -7,7 +7,7 @@
 # - alternatives: [lemma='rey']|[lemma='príncipe'][]{,5}[lemma='santo']
 import sys
 import corpus_query_language.core.core as core
-import corpus_query_language.functions.functions as functions
+import corpus_query_language.utils.utils as utils
 
 # Takes a list of dicts with the annotations as input. Returns:
 # - a list of spans (search_all function)
@@ -16,7 +16,7 @@ import corpus_query_language.functions.functions as functions
 
 def main():
 	query = sys.argv[1]
-	corpus = functions.import_corpus("tests/test_data/test_corpus.json")
+	corpus = utils.import_corpus("tests/test_data/test_corpus.json")
 	MyEngine = core.CQLEngine()
 	MyEngine.findall(corpus, query)
 	MyEngine.match(corpus, query)
