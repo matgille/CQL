@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-import src.CQLEngine.lexer as lexer
+import CQLEngine.lexer as lexer
 
 
 
@@ -74,7 +74,6 @@ class Parser(lexer.Lexer):
         | query_atom AND query_atom
         | query_atom AND query_atom AND query_atom
         | query_atom AND query_atom AND query_atom AND query_atom'''
-        print(len(p))
         if len(p) == 2:
             p[0] = p[1]
         elif len(p) == 4:
