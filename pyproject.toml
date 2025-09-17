@@ -1,6 +1,6 @@
 [project]
-name = "CQLEngine"
-version = "0.0.5"
+name = "corpus-query-language"
+version = "0.0.1"
 authors = [
   { name="Matthias Gille Levenson", email="matthias.gille-levenson@ens-lyon.fr" },
 ]
