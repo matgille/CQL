@@ -1,7 +1,7 @@
 # Python package project: CQL (Corpus Query Language) parser:
 # - parsing of any kind of annotation: word, lemma, pos, morph
 # - combination of annotations: [lemma='rey' & pos='NCMP000']
-# - one or zero annotations [lemma='rey']?. For one ore more, see the distance operator
+# - one or zero annotations [lemma='rey']?.
 # - distance [lemma='rey'][]{,5}[lemma='santo']
 # - any regex in the annotation value [lemma='reye?s?']
 # - alternatives: [lemma='rey']|[lemma='príncipe'][]{,5}[lemma='santo']
