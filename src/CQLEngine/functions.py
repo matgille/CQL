@@ -14,7 +14,7 @@ class CQLEngine():
 			:return: a list of tuples with the start and end position.
 			"""
 		query_ast = build_grammar(debug=debug, query=query)
-		result = engine.parse_corpus(query_ast, corpus, debug=debug)
+		result = engine.parse_corpus(query_ast, corpus, mode="find", debug=debug)
 		if verbose:
 			print(f"\n---\nResults for query {query}:")
 			print(f"Ast: {query_ast}")
@@ -30,8 +30,7 @@ class CQLEngine():
 		:return: a boolean
 		"""
 		query_ast = build_grammar(debug=debug, query=query)
-		result = engine.parse_corpus(query_ast, corpus, debug=debug)
-		result = len(result) != 0
+		result = engine.parse_corpus(query_ast, corpus, mode="match", debug=debug)
 		if verbose:
 			print(f"\n---\nResults for query {query}:")
 			print(result)

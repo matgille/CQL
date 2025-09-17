@@ -1,8 +1,9 @@
 import CQLEngine.functions as functions
 
 
-def parse_corpus(ast, corpus, debug):
+def parse_corpus(ast, corpus, mode, debug):
 	match = False
+	text_end = False
 	tree_index = 0
 	text_index = 0
 
@@ -21,38 +22,40 @@ def parse_corpus(ast, corpus, debug):
 	analysis_list = ['lemma', 'pos', 'morph', 'word']
 
 	# Text-directed engine.
-	while match == False:
+	while text_end == False:
+
+		# On teste si on est en bout de texte.
+		if len(corpus) == text_index and tree_index != ast_length:
+			if debug:
+				print("End of text a. Exiting.")
+			text_end = True
+			if mode == "match":
+				return False
+			break
+
+
+		# Si on matche la longueur de notre arbre
+		if tree_index == ast_length:
+			match = True
+			all_spans.append((first_matching_index, text_index))
+			if debug:
+				print(f"Appending {(first_matching_index, text_index)} to spans.")
+				print(tree_index)
+				print(ast_length)
+			first_matching_index = None
+			if match is True and mode == "match":
+				return True
+			text_index += 1
+			tree_index = 0
+			matches = True
+			# La boucle s'arrête là
+
 		if debug:
 			print("-")
 			print(corpus[text_index])
 			print(f"Text index: {text_index}")
 			print(f"Tree index: {tree_index}")
 			print(f"Ast length: {ast_length}")
-
-		# On teste si on est en bout de texte.
-		if len(corpus) == text_index:
-			if debug:
-				print("End of text. Exiting.")
-			break
-		if text_index + 1 == len(corpus):
-			tree_index += 1
-			if debug:
-				print("End of text. Exiting.")
-			break
-		# Si on matche la longueur de notre arbre
-		if tree_index == ast_length:
-			all_spans.append((first_matching_index, text_index))
-			first_matching_index = None
-			if match is True:
-				return True
-			if debug:
-				print(f"Appending {(first_matching_index, text_index)} to spans.")
-				print(tree_index)
-				print(ast_length)
-			text_index += 1
-			tree_index = 0
-			matches = True
-			# La boucle s'arrête là
 		current_query = ast[tree_index]
 		operator = current_query[0]
 		if debug:
@@ -60,6 +63,8 @@ def parse_corpus(ast, corpus, debug):
 		if operator in analysis_list:
 			if debug:
 				print(f"{operator} in list of analysis")
+				print(len(corpus))
+				print(text_index)
 			if functions.simple_match(current_query, corpus[text_index]):
 				if debug:
 					print("Found you a. Going forward on tree and text.")
