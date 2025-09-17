@@ -17,6 +17,22 @@ Two main functions are implemented:
 - match, for checking if some pattern exists in a corpus (stops at first match). Returns a boolean
 - findall, for finding the position of all matching tokens. Returns a list of tuples, with start and end position.
 
+The corpus should take the form of a list of dictionnaries:
+
+```json
+[
+  {"word": "Da", 
+  "lemma": "dar", 
+  "pos": "VERB", 
+  "morph": "Mood=Imp|Number=Sing|Person=2|Polite=Infm|VerbForm=Fin"}, 
+  {"word": "paz", 
+    "lemma": "paz", 
+    "pos": "NOUN", 
+    "morph": "Gender=Masc|Number=Sing"}
+]
+```
+
+
 ```python
 import sys
 import corpus_query_language as CQL
