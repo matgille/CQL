@@ -6,7 +6,7 @@ import CQLEngine.engine as engine
 
 
 class CQLEngine():
-	def findall(self, corpus:list[dict], query:str, debug:bool=False) -> list[tuple[int, int]]:
+	def findall(self, corpus:list[dict], query:str, verbose:bool=True,  debug:bool=False) -> list[tuple[int, int]]:
 		"""
 			This function checks if a query matches some text, and returns the start and end span.
 			:param query: a CQL query
@@ -15,13 +15,14 @@ class CQLEngine():
 			"""
 		query_ast = build_grammar(debug=debug, query=query)
 		result = engine.parse_corpus(query_ast, corpus, debug=debug)
-		print(f"\n---\nResults for query {query}:")
-		print(f"Ast: {query_ast}")
-		print(f"Spans: {result}")
+		if verbose:
+			print(f"\n---\nResults for query {query}:")
+			print(f"Ast: {query_ast}")
+			print(f"Spans: {result}")
 		return result
 
 
-	def match(self, corpus:list[dict], query:str, debug:bool=False) -> bool:
+	def match(self, corpus:list[dict], query:str, verbose:bool=True, debug:bool=False) -> bool:
 		"""
 		This function checks whether a query matches some text, and returns True or False
 		:param query: a CQL query
@@ -30,15 +31,16 @@ class CQLEngine():
 		"""
 		query_ast = build_grammar(debug=debug, query=query)
 		result = engine.parse_corpus(query_ast, corpus, debug=debug)
-		print(f"\n---\nResults for query {query}:")
 		result = len(result) != 0
-		print(result)
+		if verbose:
+			print(f"\n---\nResults for query {query}:")
+			print(result)
 		return result
 
 
 def build_grammar(debug, query):
 	MyLexer = lexer.Lexer()
-	MyLexer.build(query, debug=debug)
+	MyLexer.tokenize(query, debug=debug)
 	MyParser = parser.Parser(MyLexer, debug=debug)
 	if debug:
 		print(MyParser.ast)
