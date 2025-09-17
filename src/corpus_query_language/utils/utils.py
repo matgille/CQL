@@ -6,7 +6,13 @@ import corpus_query_language.language.lexer as lexer
 
 
 
-def build_grammar(debug, query):
+def build_grammar(debug:bool, query:str) -> list:
+	"""
+	This function builds an Abstract Syntax Tree from a query
+	:param debug: outputs parsing information
+	:param query: the query to build the AST from
+	:return: the ast
+	"""
 	MyLexer = lexer.Lexer()
 	MyLexer.tokenize(query, debug=debug)
 	MyParser = parser.Parser(MyLexer, debug=debug)
@@ -72,7 +78,12 @@ def alternative_match(queries:list[tuple], text_token:dict) -> bool:
 
 
 
-def import_corpus(path):
+def import_corpus(path) -> list:
+	"""
+	Simple JSON file import to dict
+	:param path: Path to the JSON file
+	:return: the list of dicts
+	"""
 	with open(path, "r") as f:
 		corpus = json.load(f)
 	return corpus

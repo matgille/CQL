@@ -6,6 +6,9 @@ import corpus_query_language.language.lexer as lexer
 # API functionnalities.
 
 class Parser(lexer.Lexer):
+    """
+    The parser. Builds the Ast with the tokens produced by the lexer.
+    """
     tokens = lexer.Lexer.tokens
 
     def p_or_queries(self, p):

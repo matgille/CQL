@@ -2,6 +2,11 @@ import corpus_query_language.utils.utils as utils
 import corpus_query_language.engine.engine as engine
 
 class CQLEngine():
+	"""
+	The main class: tokenize a query, parse it, and parse a corpus with 2 main functions:
+		- findall
+		- match
+	"""
 	def findall(self, corpus:list[dict], query:str, verbose:bool=True,  debug:bool=False) -> list[tuple[int, int]]:
 		"""
 			This function checks if a query matches some text, and returns the start and end span.

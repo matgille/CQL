@@ -1,7 +1,15 @@
 import corpus_query_language.utils.utils as utils
 
 
-def parse_corpus(ast, corpus, mode, debug):
+def parse_corpus(ast, corpus: list[dict], mode:str, debug) -> bool | list[tuple[int, int]]:
+	"""
+	Main function for parsing a corpus given an AST.
+	:param ast: The Abstract Syntax Tree to be matched against the corpus.
+	:param corpus: The corpus as a list of dictionaries.
+	:param mode: The mode: match (stop at first match, return Bool) or find (search for all matches, returns list of tuples)
+	:param debug: Debug mode: print all information of matching process
+	:return:
+	"""
 	match = False
 	text_end = False
 	tree_index = 0
@@ -23,7 +31,6 @@ def parse_corpus(ast, corpus, mode, debug):
 
 	# Text-directed engine.
 	while text_end == False:
-
 		# On teste si on est en bout de texte.
 		if len(corpus) == text_index and tree_index != ast_length:
 			if debug:
