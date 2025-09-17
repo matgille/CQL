@@ -1,5 +1,5 @@
 import ply.yacc as yacc
-import corpus_query_language.lexer as lexer
+import corpus_query_language.language.lexer as lexer
 
 
 

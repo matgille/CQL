@@ -1,4 +1,4 @@
-import corpus_query_language.functions as functions
+import corpus_query_language.functions.functions as functions
 
 
 def parse_corpus(ast, corpus, mode, debug):

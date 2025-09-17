@@ -1,7 +1,8 @@
 import ast
 import sys
 sys.path.append('src/')
-import corpus_query_language.functions as functions
+import corpus_query_language.core.core as core
+import corpus_query_language.functions.functions as functions
 import unittest
 
 def import_test_queries(path):
@@ -30,7 +31,7 @@ class TestQueries(unittest.TestCase):
 	def test_findall_queries(self):
 		self.corpus = functions.import_corpus("tests/test_data/test_corpus.json")
 		self.queries = import_test_queries("tests/queries_findall.txt")
-		self.MyEngine = functions.CQLEngine()
+		self.MyEngine = core.CQLEngine()
 		for query, GT in self.queries:
 			GT = ast.literal_eval(GT)
 			with self.subTest(query=query, GT=GT):
@@ -39,7 +40,7 @@ class TestQueries(unittest.TestCase):
 
 	def test_match_queries(self):
 		self.queries = import_match_queries("tests/queries_match.txt")
-		self.MyEngine = functions.CQLEngine()
+		self.MyEngine = core.CQLEngine()
 		for idx, (nodes, query, GT) in enumerate(self.queries):
 			with self.subTest(query=query, GT=GT):
 				GT = True if GT == "True" else False

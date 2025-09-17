@@ -1,4 +1,4 @@
-# Python package project: CQL (Corpus Query Language) parser:
+# Python package project: CQL (Corpus Query Language) language:
 # - parsing of any kind of annotation: word, lemma, pos, morph
 # - combination of annotations: [lemma='rey' & pos='NCMP000']
 # - one or zero annotations [lemma='rey']?.
@@ -6,18 +6,18 @@
 # - any regex in the annotation value [lemma='reye?s?']
 # - alternatives: [lemma='rey']|[lemma='príncipe'][]{,5}[lemma='santo']
 import sys
-import corpus_query_language.functions as functions
+import corpus_query_language.core.core as core
+import corpus_query_language.functions.functions as functions
 
 # Takes a list of dicts with the annotations as input. Returns:
 # - a list of spans (search_all function)
 # - a boolean (match function)
 
 
-
 def main():
 	query = sys.argv[1]
 	corpus = functions.import_corpus("tests/test_data/test_corpus.json")
-	MyEngine = functions.CQLEngine()
+	MyEngine = core.CQLEngine()
 	MyEngine.findall(corpus, query)
 	MyEngine.match(corpus, query)
 
