@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  Test-code:
     runs-on: ubuntu-latest
 
     steps:
