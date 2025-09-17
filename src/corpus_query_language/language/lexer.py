@@ -2,6 +2,9 @@ import ply.lex as lex
 import copy
 
 class Lexer(object):
+    """
+    Lexer that is used to tokenize a query.
+    """
     tokens = (
         'RANGE',
         'DISTANCE',
@@ -81,7 +84,7 @@ class Lexer(object):
         print("Illegal character '%s'" % t.value[0])
         t.lexer.skip(1)
 
-    def tokenize(self, query, debug):
+    def tokenize(self, query:str, debug:bool=False):
         self.lexer = lex.lex(module=self)
         self.lexer.input(query)
 
