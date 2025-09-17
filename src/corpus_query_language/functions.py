@@ -1,8 +1,8 @@
 import re
 import json
-import CQLEngine.parser as parser
-import CQLEngine.lexer as lexer
-import CQLEngine.engine as engine
+import corpus_query_language.parser as parser
+import corpus_query_language.lexer as lexer
+import corpus_query_language.engine as engine
 
 
 class CQLEngine():

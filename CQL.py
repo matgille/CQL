@@ -6,7 +6,7 @@
 # - any regex in the annotation value [lemma='reye?s?']
 # - alternatives: [lemma='rey']|[lemma='príncipe'][]{,5}[lemma='santo']
 import sys
-import CQLEngine.functions as functions
+import corpus_query_language.functions as functions
 
 # Takes a list of dicts with the annotations as input. Returns:
 # - a list of spans (search_all function)
