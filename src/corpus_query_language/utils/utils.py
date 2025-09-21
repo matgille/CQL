@@ -17,7 +17,8 @@ def build_grammar(debug:bool, query:str) -> list:
 	MyLexer.tokenize(query, debug=debug)
 	MyParser = parser.Parser(MyLexer, debug=debug)
 	if debug:
-		print(MyParser.ast)
+		print(json.dumps(MyParser.ast,
+							   sort_keys=False, indent=2))
 	return MyParser.ast
 
 

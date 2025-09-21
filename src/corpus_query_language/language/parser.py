@@ -18,14 +18,14 @@ class Parser(lexer.Lexer):
         '''
         print(p[:])
         print("ATOMIC OR\n\n\n")
-        if p[1][0] == 'or':
+        if 'or' in p[1]:
             print("Cas 1")
-            interm = list(p[1])
+            interm = list(p[1]['or'])
             interm.append(p[3])
-            p[0] = interm
+            p[0] = {'or': interm}
         else:
             print("Cas 2")
-            p[0] = ['or', p[1], p[3]]
+            p[0] = {'or': [p[1], p[3]]}
         print(p[0])
 
     # def p_or_queries(self, p):
@@ -70,7 +70,7 @@ class Parser(lexer.Lexer):
         else:
             print("Cas 3")
             print(p[2])
-            p[0] = p[1] + [['distance', p[2]]] + p[3]
+            p[0] = p[1] + [{'distance': p[2]}] + p[3]
         print(p[0])
 
 
@@ -81,7 +81,7 @@ class Parser(lexer.Lexer):
 
     def p_bracketed_query(self, p):
         'bracketed_query : LSQBRACK query_content RSQBRACK'
-        p[0] = p[2]
+        p[0] = {"ling": p[2]}
 
     def p_ling_equality(self, p):
         '''query_atom : LEMMA EQUAL VALUE
@@ -94,22 +94,22 @@ class Parser(lexer.Lexer):
          | WORD NOTEQUAL VALUE'''
         if p[2] == "=":
             if p[1] == "lemma":
-                p[0] = ['lemma', '=', p[3]]
+                p[0] = {"equal": ['lemma', p[3]]}
             elif p[1] == "pos":
-                p[0] = ['pos', '=', p[3]]
+                p[0] = {"equal": ['pos', p[3]]}
             elif p[1] == "morph":
-                p[0] = ['morph', '=', p[3]]
+                p[0] = {"equal": ['morph', p[3]]}
             elif p[1] == "word":
-                p[0] = ['word', '=', p[3]]
+                p[0] = {"equal": ['word', p[3]]}
         else:
             if p[1] == "lemma":
-                p[0] = ['lemma', '!=', p[3]]
+                p[0] = {"unequal": ['lemma', p[3]]}
             elif p[1] == "pos":
-                p[0] = ['pos', '!=', p[3]]
+                p[0] = {"unequal": ['pos', p[3]]}
             elif p[1] == "morph":
-                p[0] = ['morph', '!=', p[3]]
+                p[0] = {"unequal": ['morph', p[3]]}
             elif p[1] == "word":
-                p[0] = ['word', '!=', p[3]]
+                p[0] = {"unequal": ['word', p[3]]}
 
 
 
@@ -121,15 +121,15 @@ class Parser(lexer.Lexer):
         if len(p) == 2:
             p[0] = p[1]
         elif len(p) == 4:
-            p[0] = ['and', p[1], p[3]]
+            p[0] = {'and': [p[1], p[3]]}
         elif len(p) == 6:
-            p[0] = ['and', p[1], p[3], p[5]]
+            p[0] = {'and':[ p[1], p[3], p[5]]}
         elif len(p) == 8:
-            p[0] = ['and', p[1], p[3], p[5], p[7]]
+            p[0] = {'and': [p[1], p[3], p[5], p[7]]}
 
     def p_one_or_zero(self, p):
         'queries : queries query INTERROGATIVE'
-        p[0] = p[1] + [('?', p[2])]
+        p[0] = p[1] + [{'one_or_zero': p[2]}]
 
     def p_error(self, p):
         if p:
